@@ -40,8 +40,12 @@ Farmer's question: ${question}`;
     res.json({ answer });
 
   } catch (error) {
-    console.error('Gemini API error:', error);
-    res.status(500).json({ error: 'Could not get a response. Please try again.' });
+    console.error('Gemini API error:', JSON.stringify(error, null, 2));
+    console.error('Error message:', error.message);
+    res.status(500).json({ 
+      error: 'Could not get a response. Please try again.',
+      details: error.message 
+    });
   }
 });
 
